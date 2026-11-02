@@ -1,0 +1,284 @@
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Page shell ────────────────────────────────────────────────────────────── */
+.cf-page {
+  min-height: 100vh;
+  background: #0d0f0e;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px 48px;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.cf-card {
+  width: 100%;
+  max-width: 640px;
+  background: #111412;
+  border: 1px solid #1e2420;
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
+.cf-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.cf-logo-icon {
+  width: 42px;
+  height: 42px;
+  background: #1a2e22;
+  border: 1px solid #2a4535;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.cf-brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4caf77;
+  line-height: 1.2;
+}
+
+.cf-subtext {
+  font-size: 13px;
+  color: #6b7c74;
+  margin-top: 2px;
+}
+
+/* ── Section labels ────────────────────────────────────────────────────────── */
+.cf-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #4b5e55;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.cf-section-gap {
+  margin-top: 28px;
+}
+
+/* ── Field ─────────────────────────────────────────────────────────────────── */
+.cf-field {
+  margin-bottom: 16px;
+}
+
+.cf-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #c8d6cf;
+  margin-bottom: 6px;
+}
+
+/* ── Two-column row ────────────────────────────────────────────────────────── */
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── Inputs ────────────────────────────────────────────────────────────────── */
+.cf-input {
+  width: 100%;
+  background: #0a0c0b;
+  border: 1px solid #1e2c24;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: #d4e0d8;
+  outline: none;
+  transition: border-color 0.18s;
+  appearance: none;
+}
+
+.cf-input::placeholder { color: #3d5047; }
+
+.cf-input:focus {
+  border-color: #3a7d56;
+  box-shadow: 0 0 0 2px rgba(58, 125, 86, 0.18);
+}
+
+.cf-input-error {
+  border-color: #a33535 !important;
+  box-shadow: 0 0 0 2px rgba(163, 53, 53, 0.15) !important;
+}
+
+.cf-input:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* select arrow */
+.cf-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234b5e55' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.cf-select option { background: #111412; color: #d4e0d8; }
+
+/* ── Phone field ───────────────────────────────────────────────────────────── */
+.cf-phone-wrap {
+  display: flex;
+  align-items: center;
+  background: #0a0c0b;
+  border: 1px solid #1e2c24;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.18s;
+}
+
+.cf-phone-wrap:focus-within {
+  border-color: #3a7d56;
+  box-shadow: 0 0 0 2px rgba(58, 125, 86, 0.18);
+}
+
+.cf-phone-prefix {
+  padding: 11px 12px 11px 14px;
+  font-size: 14px;
+  color: #6b7c74;
+  border-right: 1px solid #1e2c24;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cf-input-phone {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  flex: 1;
+}
+
+.cf-input-phone:focus { box-shadow: none; }
+
+/* ── Toggle group ──────────────────────────────────────────────────────────── */
+.cf-toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cf-toggle {
+  padding: 11px 0;
+  background: #0a0c0b;
+  border: 1px solid #1e2c24;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #6b7c74;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: inherit;
+}
+
+.cf-toggle:hover { border-color: #2e5040; color: #9dbfb0; }
+
+.cf-toggle-active {
+  background: #1a3027;
+  border-color: #3a7d56;
+  color: #4caf77;
+  font-weight: 600;
+}
+
+/* ── Submit button ─────────────────────────────────────────────────────────── */
+.cf-btn {
+  display: inline-block;
+  background: #2a6b47;
+  color: #d8f0e4;
+  border: none;
+  border-radius: 8px;
+  padding: 13px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+  text-decoration: none;
+  text-align: center;
+  font-family: inherit;
+}
+
+.cf-btn:hover:not(:disabled) { background: #337d56; }
+.cf-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.cf-btn-full {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── Alerts / errors ───────────────────────────────────────────────────────── */
+.cf-alert {
+  background: #2c1414;
+  border: 1px solid #5a2020;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #e09090;
+  margin-bottom: 18px;
+}
+
+.cf-error {
+  display: block;
+  font-size: 12px;
+  color: #d07070;
+  margin-top: 4px;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+.cf-footer {
+  text-align: center;
+  font-size: 13px;
+  color: #4b5e55;
+  margin-top: 18px;
+}
+
+.cf-link {
+  color: #4caf77;
+  text-decoration: none;
+}
+
+.cf-link:hover { text-decoration: underline; }
+
+/* ── Success card extras ────────────────────────────────────────────────────── */
+.cf-success {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.cf-success .cf-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.cf-success .cf-logo-icon {
+  width: 54px;
+  height: 54px;
+  font-size: 26px;
+  background: #1a3027;
+  border-color: #3a7d56;
+  color: #4caf77;
+}
+
+.cf-success h2 {
+  font-size: 22px;
+  color: #c8d6cf;
+  margin-bottom: 8px;
+}
+
+.cf-success p {
+  font-size: 14px;
+  color: #6b7c74;
+  margin-bottom: 24px;
+}
+

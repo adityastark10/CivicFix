@@ -1,0 +1,188 @@
+/* ── Page shell ─────────────────────────────────────────────────────────────── */
+.db-page {
+  min-height: 100vh;
+  background: #0d0f0e;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 36px 16px 60px;
+}
+
+.db-loader {
+  color: #6b7c74;
+  font-size: 15px;
+  margin-top: 120px;
+}
+
+/* ── Card ───────────────────────────────────────────────────────────────────── */
+.db-card {
+  width: 100%;
+  max-width: 640px;
+  background: #111412;
+  border: 1px solid #1e2420;
+  border-radius: 14px;
+  padding: 28px 28px 32px;
+}
+
+/* ── Header row ─────────────────────────────────────────────────────────────── */
+.db-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.db-avatar {
+  width: 52px;
+  height: 52px;
+  background: #1a3027;
+  border: 2px solid #3a7d56;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: #4caf77;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+
+.db-header-info {
+  flex: 1;
+}
+
+.db-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #c8d6cf;
+  margin-bottom: 5px;
+}
+
+.db-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.db-badge-urban {
+  background: #1a2e40;
+  color: #5baed6;
+  border: 1px solid #2a4a60;
+}
+
+.db-badge-rural {
+  background: #1a2e22;
+  color: #4caf77;
+  border: 1px solid #2a4535;
+}
+
+/* ── Logout button ──────────────────────────────────────────────────────────── */
+.db-logout {
+  background: #1a1e1c;
+  border: 1px solid #2e3c35;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7a9080;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: inherit;
+}
+
+.db-logout:hover {
+  background: #2c1414;
+  border-color: #5a2020;
+  color: #e09090;
+}
+
+/* ── Section label ──────────────────────────────────────────────────────────── */
+.db-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #4b5e55;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── Info grid ──────────────────────────────────────────────────────────────── */
+.db-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.db-info-card {
+  background: #0a0c0b;
+  border: 1px solid #1e2c24;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.db-info-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #4b5e55;
+  text-transform: uppercase;
+}
+
+.db-info-value {
+  font-size: 14px;
+  color: #c8d6cf;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* ── Alert ──────────────────────────────────────────────────────────────────── */
+.db-alert {
+  background: #2c1414;
+  border: 1px solid #5a2020;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #e09090;
+  margin-bottom: 18px;
+}
+
+/* ── Coming soon banner ─────────────────────────────────────────────────────── */
+.db-coming-soon {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #111e17;
+  border: 1px dashed #2a4535;
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 22px;
+}
+
+.db-coming-soon strong {
+  display: block;
+  font-size: 14px;
+  color: #c8d6cf;
+  margin-bottom: 4px;
+}
+
+.db-coming-soon p {
+  font-size: 13px;
+  color: #4b5e55;
+  margin: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .db-grid { grid-template-columns: 1fr; }
+  .db-header { flex-wrap: wrap; }
+  .db-logout { margin-left: auto; }
+}
+

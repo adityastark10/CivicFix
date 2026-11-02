@@ -1,0 +1,11 @@
+/* Global base */
+:root { color-scheme: dark; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0d0f0e;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+

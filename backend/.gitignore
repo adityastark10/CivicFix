@@ -1,0 +1,6 @@
+node_modules/
+civicfix.db
+civicfix.db-wal
+civicfix.db-shm
+.env
+
