@@ -1,0 +1,14 @@
+<header class="site-header">
+  <div class="header-container">
+    <a href="/" class="brand-logo">
+      <span class="brand-icon">🏛️</span>
+      <span class="brand-name">Civic<span class="brand-accent">Fix</span></span>
+    </a>
+
+    <nav class="header-nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/register" class="nav-link <%= typeof pageTitle !== 'undefined' && pageTitle.includes('Registration') ? 'active' : '' %>">Citizen Register</a>
+      <a href="/login" class="nav-link btn-nav-login <%= typeof pageTitle !== 'undefined' && pageTitle.includes('Login') ? 'active' : '' %>">Log In</a>
+    </nav>
+  </div>
+</header>

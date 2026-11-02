@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../partials/head') %>
+</head>
+<body class="dark-theme">
+
+  <%- include('../../partials/header') %>
+
+  <main class="auth-page-wrapper">
+    <div class="auth-card-container">
+      
+      <!-- Card Header -->
+      <div class="auth-card-header">
+        <h1 class="auth-title">Citizen Registration</h1>
+        <p class="auth-subtitle">Create your verified CivicFix account to report civic issues and request public facilities.</p>
+      </div>
+
+      <!-- General Form Error Banner -->
+      <% if (typeof errors !== 'undefined' && Object.keys(errors).length > 0) { %>
+        <div class="alert-banner alert-error" role="alert">
+          <span class="alert-icon">⚠️</span>
+          <span>Please fix the highlighted errors below before proceeding.</span>
+        </div>
+      <% } %>
+
+      <!-- Registration Form -->
+      <form action="/register" method="POST" id="registrationForm" class="auth-form" novalidate>
+
+        <!-- SECTION 1: Personal Details -->
+        <div class="form-section">
+          <div class="section-badge">Personal Details</div>
+
+          <!-- 1. Full Name -->
+          <div class="form-group">
+            <label for="fullName" class="form-label">Full Name <span class="required-star">*</span></label>
+            <input 
+              type="text" 
+              id="fullName" 
+              name="fullName" 
+              class="form-input <%= errors && errors.fullName ? 'input-error' : '' %>"
+              placeholder="Enter your full legal name"
+              value="<%= typeof formData !== 'undefined' && formData.fullName ? formData.fullName : '' %>"
+              required
+              autocomplete="name"
+            />
+            <span class="field-error-msg" id="fullNameError"><%= errors && errors.fullName ? errors.fullName : '' %></span>
+          </div>
+
+          <!-- 2. Phone Number -->
+          <div class="form-group">
+            <label for="phoneNumber" class="form-label">Phone Number <span class="required-star">*</span></label>
+            <div class="input-with-prefix">
+              <span class="input-prefix">+91</span>
+              <input 
+                type="tel" 
+                id="phoneNumber" 
+                name="phoneNumber" 
+                maxlength="10"
+                class="form-input input-prefixed <%= errors && errors.phoneNumber ? 'input-error' : '' %>"
+                placeholder="10-digit mobile number"
+                value="<%= typeof formData !== 'undefined' && formData.phoneNumber ? formData.phoneNumber : '' %>"
+                required
+                autocomplete="tel-national"
+              />
+            </div>
+            <span class="field-error-msg" id="phoneNumberError"><%= errors && errors.phoneNumber ? errors.phoneNumber : '' %></span>
+            <span class="field-hint">Used as your login username.</span>
+          </div>
+
+          <!-- 3. Email Address -->
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address <span class="required-star">*</span></label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form-input <%= errors && errors.email ? 'input-error' : '' %>"
+              placeholder="name@example.com"
+              value="<%= typeof formData !== 'undefined' && formData.email ? formData.email : '' %>"
+              required
+              autocomplete="email"
+            />
+            <span class="field-error-msg" id="emailError"><%= errors && errors.email ? errors.email : '' %></span>
+          </div>
+
+          <!-- 4. Aadhaar Number -->
+          <div class="form-group">
+            <label for="aadhaarNumber" class="form-label">Aadhaar Number <span class="required-star">*</span></label>
+            <input 
+              type="text" 
+              id="aadhaarNumber" 
+              name="aadhaarNumber" 
+              maxlength="14"
+              class="form-input <%= errors && errors.aadhaarNumber ? 'input-error' : '' %>"
+              placeholder="12-digit Aadhaar (e.g. 1234 5678 9012)"
+              value="<%= typeof formData !== 'undefined' && formData.aadhaarNumber ? formData.aadhaarNumber : '' %>"
+              required
+            />
+            <span class="field-error-msg" id="aadhaarNumberError"><%= errors && errors.aadhaarNumber ? errors.aadhaarNumber : '' %></span>
+            <span class="field-hint">Preserved securely for citizen identity verification.</span>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Your Location -->
+        <div class="form-section">
+          <div class="section-badge">Your Location</div>
+
+          <!-- 5. State -->
+          <div class="form-group">
+            <label for="state" class="form-label">State <span class="required-star">*</span></label>
+            <select 
+              id="state" 
+              name="state" 
+              class="form-select <%= errors && errors.state ? 'input-error' : '' %>"
+              required
+            >
+              <option value="">-- Select State --</option>
+              <% Object.keys(locationData).forEach(function(stateName) { %>
+                <option 
+                  value="<%= stateName %>" 
+                  <%= typeof formData !== 'undefined' && formData.state === stateName ? 'selected' : '' %>
+                >
+                  <%= stateName %>
+                </option>
+              <% }); %>
+            </select>
+            <span class="field-error-msg" id="stateError"><%= errors && errors.state ? errors.state : '' %></span>
+          </div>
+
+          <!-- 6. District (Dependent on State) -->
+          <div class="form-group">
+            <label for="district" class="form-label">District <span class="required-star">*</span></label>
+            <select 
+              id="district" 
+              name="district" 
+              class="form-select <%= errors && errors.district ? 'input-error' : '' %>"
+              required
+            >
+              <option value="">-- Select State First --</option>
+            </select>
+            <span class="field-error-msg" id="districtError"><%= errors && errors.district ? errors.district : '' %></span>
+          </div>
+
+          <!-- 7. Local Government Type -->
+          <div class="form-group">
+            <label class="form-label">Local Government Type <span class="required-star">*</span></label>
+            <div class="radio-pill-group">
+              <label class="radio-pill">
+                <input 
+                  type="radio" 
+                  name="localGovType" 
+                  value="urban" 
+                  id="govTypeUrban"
+                  <%= typeof formData !== 'undefined' && (formData.localGovType === 'urban' || !formData.localGovType) ? 'checked' : 'checked' %>
+                />
+                <span class="pill-label">🏢 Urban (Municipality / Corp)</span>
+              </label>
+
+              <label class="radio-pill">
+                <input 
+                  type="radio" 
+                  name="localGovType" 
+                  value="rural" 
+                  id="govTypeRural"
+                  <%= typeof formData !== 'undefined' && formData.localGovType === 'rural' ? 'checked' : '' %>
+                />
+                <span class="pill-label">🌾 Rural (Gram Panchayat)</span>
+              </label>
+            </div>
+            <span class="field-error-msg" id="localGovTypeError"><%= errors && errors.localGovType ? errors.localGovType : '' %></span>
+          </div>
+
+          <!-- 8. Municipality / Corporation / Gram Panchayat (Dependent) -->
+          <div class="form-group">
+            <label for="localBodyName" class="form-label" id="localBodyLabel">
+              Municipality / Corporation <span class="required-star">*</span>
+            </label>
+            <select 
+              id="localBodyName" 
+              name="localBodyName" 
+              class="form-select <%= errors && errors.localBodyName ? 'input-error' : '' %>"
+              required
+            >
+              <option value="">-- Select District & Type First --</option>
+            </select>
+            <span class="field-error-msg" id="localBodyNameError"><%= errors && errors.localBodyName ? errors.localBodyName : '' %></span>
+          </div>
+
+          <!-- 9. Ward / Sansad Number -->
+          <div class="form-group">
+            <label for="wardNumber" class="form-label">Ward Number / Sansad <span class="required-star">*</span></label>
+            <input 
+              type="text" 
+              id="wardNumber" 
+              name="wardNumber" 
+              class="form-input <%= errors && errors.wardNumber ? 'input-error' : '' %>"
+              placeholder="e.g. Ward 64 or Sansad 3"
+              value="<%= typeof formData !== 'undefined' && formData.wardNumber ? formData.wardNumber : '' %>"
+              required
+            />
+            <span class="field-error-msg" id="wardNumberError"><%= errors && errors.wardNumber ? errors.wardNumber : '' %></span>
+          </div>
+
+          <!-- 10. Locality / Area -->
+          <div class="form-group">
+            <label for="locality" class="form-label">Locality / Area / Landmark <span class="required-star">*</span></label>
+            <input 
+              type="text" 
+              id="locality" 
+              name="locality" 
+              class="form-input <%= errors && errors.locality ? 'input-error' : '' %>"
+              placeholder="e.g. Park Circus, Near Primary School"
+              value="<%= typeof formData !== 'undefined' && formData.locality ? formData.locality : '' %>"
+              required
+            />
+            <span class="field-error-msg" id="localityError"><%= errors && errors.locality ? errors.locality : '' %></span>
+          </div>
+
+          <!-- 11. PIN Code -->
+          <div class="form-group">
+            <label for="pinCode" class="form-label">PIN Code <span class="required-star">*</span></label>
+            <input 
+              type="text" 
+              id="pinCode" 
+              name="pinCode" 
+              maxlength="6"
+              class="form-input <%= errors && errors.pinCode ? 'input-error' : '' %>"
+              placeholder="6-digit postal code (e.g. 700017)"
+              value="<%= typeof formData !== 'undefined' && formData.pinCode ? formData.pinCode : '' %>"
+              required
+            />
+            <span class="field-error-msg" id="pinCodeError"><%= errors && errors.pinCode ? errors.pinCode : '' %></span>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Account Security -->
+        <div class="form-section">
+          <div class="section-badge">Account Security</div>
+
+          <!-- 12. Password -->
+          <div class="form-group">
+            <label for="password" class="form-label">Password <span class="required-star">*</span></label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              class="form-input <%= errors && errors.password ? 'input-error' : '' %>"
+              placeholder="Create a strong password"
+              required
+              autocomplete="new-password"
+            />
+            <span class="field-error-msg" id="passwordError"><%= errors && errors.password ? errors.password : '' %></span>
+            
+            <!-- Live Password Strength Indicator -->
+            <div class="password-meter-container" id="passwordMeterContainer">
+              <div class="meter-bar-track">
+                <div class="meter-bar-fill" id="meterFill"></div>
+              </div>
+              <span class="meter-text" id="meterText">Password strength</span>
+            </div>
+            <span class="field-hint">Must be at least 8 characters with 1 uppercase, 1 lowercase, 1 digit, and 1 symbol.</span>
+          </div>
+
+          <!-- 13. Confirm Password -->
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">Confirm Password <span class="required-star">*</span></label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              class="form-input <%= errors && errors.confirmPassword ? 'input-error' : '' %>"
+              placeholder="Re-enter your password"
+              required
+              autocomplete="new-password"
+            />
+            <span class="field-error-msg" id="confirmPasswordError"><%= errors && errors.confirmPassword ? errors.confirmPassword : '' %></span>
+          </div>
+        </div>
+
+        <!-- Single Primary Action Button -->
+        <div class="form-actions">
+          <button type="submit" id="submitRegisterBtn" class="btn-primary-action">
+            Register
+          </button>
+        </div>
+
+        <!-- Bottom Link to Login -->
+        <div class="auth-card-footer">
+          <p>Already have an account? <a href="/login" class="link-accent">Log in here</a></p>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <%- include('../../partials/footer') %>
+
+  <!-- Embed Master Location Data for Client-Side Dependent Dropdowns -->
+  <script>
+    window.CIVICFIX_LOCATIONS = <%- JSON.stringify(locationData) %>;
+    window.CIVICFIX_PREVIOUS_VALUES = {
+      district: "<%= typeof formData !== 'undefined' && formData.district ? formData.district : '' %>",
+      localGovType: "<%= typeof formData !== 'undefined' && formData.localGovType ? formData.localGovType : 'urban' %>",
+      localBodyName: "<%= typeof formData !== 'undefined' && formData.localBodyName ? formData.localBodyName : '' %>"
+    };
+  </script>
+
+  <!-- Client-Side Real-time Validation & Dynamic Dropdown Script -->
+  <script src="/js/register-validation.js"></script>
+</body>
+</html>
